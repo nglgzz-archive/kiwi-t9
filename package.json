@@ -4,7 +4,7 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
-    "setup": "echo 'change app name on package.json, project folder and client/index.html files'",
+    "make-suggestions": "node -e \"require('./server/utils/suggestions').generateSuggestions()\"",
     "start": "npm-run-all --parallel watch:build watch:server",
     "watch:build": "webpack --watch",
     "watch:server": "nodemon server/index.js"
