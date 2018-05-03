@@ -5,7 +5,7 @@ module.exports = {
   devtool: 'cheap-module-source-map',
 
   output: {
-    path: `${__dirname}/dist`,
+    path: `${__dirname}/client/dist`,
     filename: 'app.js',
     libraryTarget: 'umd',
     publicPath: '/static/',
