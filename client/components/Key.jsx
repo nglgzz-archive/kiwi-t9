@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import fetchSuggestions from 'actions/fetchSuggestions';
 import 'sass/Key.sass';
 
 
+@connect(store => ({
+  digits: store.text.digits,
+}))
 export default class Key extends Component {
   constructor(props) {
     super(props);
@@ -11,7 +16,7 @@ export default class Key extends Component {
   }
 
   handleClick() {
-    console.log(this.props.label);
+    this.props.dispatch(fetchSuggestions(this.props.digits + this.props.label));
   }
 
   render() {

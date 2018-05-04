@@ -1,0 +1,8 @@
+{
+  "fetchSuggestions": {
+    "def": "FETCH_SUGGESTIONS",
+    "pending": "FETCH_SUGGESTIONS_PENDING",
+    "fulfilled": "FETCH_SUGGESTIONS_FULFILLED",
+    "rejected": "FETCH_SUGGESTIONS_REJECTED"
+  }
+}
