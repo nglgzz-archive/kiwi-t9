@@ -19,8 +19,7 @@ export default class Screen extends Component {
 
         <div className="textbox">
           <span>{text}</span>
-          <span className="last-word">{lastWord}</span>
-          <span className="cursor" />
+          <span className="textbox-lastword">{lastWord}</span>
         </div>
 
         <div className="actions">

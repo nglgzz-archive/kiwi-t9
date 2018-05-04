@@ -1,9 +1,23 @@
 @import variables
 
 
+@keyframes blink
+  0%
+    opacity: 1
+
+  50%
+    opacity: 1
+
+  51%
+    opacity: 0
+
+  100%
+    opacity: 0
+
+
 .screen
   +flex-center
-  background: $tom-thumb
+  background-color: $tom-thumb
   border-radius: 10px
   box-shadow: inset $top-left-shadow, inset $top-right-shadow
   color: $hunter-green
@@ -14,18 +28,25 @@
   max-width: 260px
   padding: 10px
 
-  .statusbar
-    align-self: flex-end
-
-  .textbox
-    border: 4px solid $hunter-green
-    height: 100%
-    padding: 5px
-    width: calc(100% - 10px)
-
   .actions
     text-align: center
 
     a
       color: $hunter-green
       text-decoration: none
+
+  .statusbar
+    align-self: flex-end
+
+
+.textbox
+  border: 4px solid $hunter-green
+  height: 100%
+  padding: 5px
+  width: calc(100% - 10px)
+
+  &-lastword::after
+    animation: blink 2s infinite
+    background-color: $hunter-green
+    content: '-'
+    display: inline

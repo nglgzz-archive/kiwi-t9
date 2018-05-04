@@ -8,24 +8,49 @@
   flex-direction: row
   height: 50px
   margin: 5px 10px
+  outline: none
   width: calc(100% / 3 - 20px)
 
-  &--left
-    border-radius: 60% 90%
-    box-shadow: $bottom-left-shadow, $top-right-shadow
+  &:active
+    background: linear-gradient(to bottom, darken($athens-gray, 10) 40%, darken($mischka, 10) 100%)
 
-  &--center
-    border-radius: 50%
-    box-shadow: $top-left-shadow, $top-right-shadow, $bottom-left-shadow, $bottom-right-shadow
-    transform: translateY(40%)
+  &--left
+    +shadow(0, 3, 0, 3)
+    border-radius: 60% 90%
 
   &--right
+    +shadow(0, 3, 0, 3)
     border-radius: 90% 60%
-    box-shadow: $bottom-left-shadow, $top-right-shadow
     flex-direction: row-reverse
+
+  &--center
+    +shadow(3, 3, 3, 3)
+    border-radius: 50%
+    transform: translateY(40%)
 
 
 .key-label
   font-size: 1.5em
   font-weight: bold
   margin: 0 5px
+
+
++respond-after($mobile)
+  .key
+    &:hover
+      background: linear-gradient(to bottom, lighten($athens-gray, 10) 40%, lighten($mischka, 10) 100%)
+
+    &--left,
+    &--right
+      &:hover
+        +shadow(0, 2, 0, 2)
+
+      &:active
+        +shadow(0, 4, 0, 4)
+
+    &--center
+      &:hover
+        +shadow(2, 2, 2, 2)
+
+      &:active
+        +shadow(4, 4, 4, 4)

@@ -14,9 +14,24 @@ $bottom-left-shadow: -3px 3px 5px 0 rgba(0, 0, 0, .75)
 $bottom-right-shadow: 3px 3px 5px 0 rgba(0, 0, 0, .75)
 
 
+// Sizes
+$mobile: 440px
+
 // Mixins
 =flex-center
   align-items: center
   display: flex
   flex-direction: column
   justify-content: center
+
+=shadow($top-left, $top-right, $bottom-right, $bottom-left, $opacity: .75)
+  $shadow-color: rgba(0, 0, 0, $opacity)
+  box-shadow: -#{$top-left}px -#{$top-left}px 5px 0 $shadow-color, #{$top-right}px -#{$top-right}px 5px 0 $shadow-color, #{$bottom-right}px #{$bottom-right}px 5px 0 $shadow-color, -#{$bottom-left}px #{$bottom-left}px 5px 0 $shadow-color
+
+=respond-while($width)
+  @media (max-width: #{$width})
+    @content
+
+=respond-after($width)
+  @media (min-width: #{$width})
+    @content

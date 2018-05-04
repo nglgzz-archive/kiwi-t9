@@ -13,18 +13,55 @@ body
   height: 100vh
   margin: 0
 
+
 .phone
-  background: $big-stone
+  background-color: $big-stone
+  border: 15px solid darken($big-stone, 5)
   border-radius: 0 0 80px 80px
   margin-top: 160px
-  padding: 50px 30px
+  padding: 50px 15px
 
   &::before
-    background: $big-stone
+    background-color: $big-stone
+    border: 15px solid darken($big-stone, 5)
+    border-bottom: 0
     border-radius: 60% 60% 0 0
     content: ''
     display: block
-    height: 160px
+    height: 130px
     position: absolute
     transform: translate(-30px, -100%)
-    width: 360px
+    width: 330px
+
+
+.speaker
+  display: flex
+  justify-content: space-around
+  margin: 0 auto
+  transform: translateY(-50px)
+  width: 60px
+
+  span
+    background-color: $black
+    border-radius: 3px
+    display: inline-block
+    height: 10px
+    width: 10px
+
+
++respond-while($mobile)
+  body
+    background-color: $big-stone
+    // The browser's chrome doesn't play well with height: 100vh on mobile
+    height: initial
+
+  .phone
+    border: 0
+    margin: 0
+    padding: 5px 30px
+
+    &::before
+      border: 0
+
+  .speaker
+    display: none

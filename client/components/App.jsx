@@ -6,6 +6,12 @@ import 'sass/App.sass';
 
 export default () => (
   <div className="phone">
+    <div className="speaker">
+      <span />
+      <span />
+      <span />
+    </div>
+
     <Screen />
     <Keypad />
   </div>
