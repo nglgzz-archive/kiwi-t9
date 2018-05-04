@@ -1,0 +1,29 @@
+@import variables
+
+
+.screen
+  +flex-center
+  background: $tom-thumb
+  border-radius: 10px
+  box-shadow: inset $top-left-shadow, inset $top-right-shadow
+  color: $hunter-green
+  font-family: 'Nokia'
+  height: 290px
+  justify-content: space-between
+  margin: 10px
+  max-width: 260px
+  padding: 10px
+
+  .statusbar
+    align-self: flex-end
+
+  .textbox
+    border: 4px solid $hunter-green
+    padding: 5px
+
+  .actions
+    text-align: center
+
+    a
+      color: $hunter-green
+      text-decoration: none

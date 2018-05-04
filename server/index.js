@@ -9,6 +9,7 @@ app.use('/api', api);
 
 // Static files
 app.use('/static', express.static('client/dist'));
+app.use('/static', express.static('client/fonts'));
 app.get('*', (_, res) => res.sendFile('index.html', { root: 'client' }));
 
 // Magic

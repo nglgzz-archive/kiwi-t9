@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
+    "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2"
   },
@@ -33,6 +34,7 @@
     "nodemon": "^1.17.3",
     "npm-run-all": "^4.1.2",
     "postcss-loader": "^2.1.4",
+    "sass-lint": "^1.12.1",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "webpack": "^4.6.0",
@@ -48,7 +50,7 @@
     "ignore": [
       "dist"
     ],
-    "exec": "eslint --ext js,jsx . && node",
+    "exec": "sass-lint -v client/sass/* && eslint --ext js,jsx . && node",
     "ext": "jsx,js,html,sass"
   },
   "babel": {

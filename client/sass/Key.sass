@@ -1,0 +1,31 @@
+@import variables
+
+
+.key
+  +flex-center
+  background: linear-gradient(to bottom, $athens-gray 40%, $mischka 100%)
+  border: 0
+  flex-direction: row
+  height: 50px
+  margin: 5px 10px
+  width: calc(100% / 3 - 20px)
+
+  &--left
+    border-radius: 60% 90%
+    box-shadow: $bottom-left-shadow, $top-right-shadow
+
+  &--center
+    border-radius: 50%
+    box-shadow: $top-left-shadow, $top-right-shadow, $bottom-left-shadow, $bottom-right-shadow
+    transform: translateY(40%)
+
+  &--right
+    border-radius: 90% 60%
+    box-shadow: $bottom-left-shadow, $top-right-shadow
+    flex-direction: row-reverse
+
+
+.key-label
+  font-size: 1.5em
+  font-weight: bold
+  margin: 0 5px

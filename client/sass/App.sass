@@ -1,0 +1,30 @@
+@import variables
+
+
+@font-face
+  font-family: 'Nokia'
+  // This font was downloaded from https://www.dafont.com/nokia-cellphone.font
+  src: url('/static/Nokia.ttf') format('truetype')
+
+
+body
+  +flex-center
+  background-color: $black
+  height: 100vh
+  margin: 0
+
+.phone
+  background: $big-stone
+  border-radius: 0 0 80px 80px
+  margin-top: 160px
+  padding: 50px 30px
+
+  &::before
+    background: $big-stone
+    border-radius: 60% 60% 0 0
+    content: ''
+    display: block
+    height: 160px
+    position: absolute
+    transform: translate(-30px, -100%)
+    width: 360px

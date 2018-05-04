@@ -1,0 +1,14 @@
+[
+  { "label": "1", "description": ".,!"},
+  { "label": "2", "description": "abc"},
+  { "label": "3", "description": "def"},
+  { "label": "4", "description": "ghi"},
+  { "label": "5", "description": "jkl"},
+  { "label": "6", "description": "mno"},
+  { "label": "7", "description": "pqrs"},
+  { "label": "8", "description": "tuv"},
+  { "label": "9", "description": "wxyz"},
+  { "label": "*", "description": "next"},
+  { "label": "0", "description": "_"},
+  { "label": "#", "description": "add"}
+]
