@@ -12,7 +12,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actions.type.fulfilled: {
+    case actions.fetchSuggestions.fulfilled: {
       const { digits, suggestions } = action.payload.data;
 
       // For now suggestions are ordered by rank (lower == better).
