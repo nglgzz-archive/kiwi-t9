@@ -24,10 +24,15 @@ respectively contain the code for the frontend and the backend. The structure of
 those folders is the following.
 
 #### client
+- **actions**: Redux action creators
 - **components**: React components
-- **dist**: compiled static files
+- **dist**: compiled static files (served as static content)
+- **fonts**: custom fonts (served as static content)
+- **reducers**: Redux reducers
 - **sass**: stylesheets
+- **utils**: anything that doesn't fit the folders above
 
 #### server
 - **api**: express routers
-- **utils**: everything that doesn't fit on api
+- **data**: data... duh
+- **utils**: everything that doesn't fit the folders above
