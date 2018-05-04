@@ -4,5 +4,8 @@
     "pending": "FETCH_SUGGESTIONS_PENDING",
     "fulfilled": "FETCH_SUGGESTIONS_FULFILLED",
     "rejected": "FETCH_SUGGESTIONS_REJECTED"
-  }
+  },
+
+  "nextSuggestion": "NEXT_SUGGESTION",
+  "endSuggestion": "END_SUGGESTION"
 }

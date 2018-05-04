@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import fetchSuggestions from 'actions/fetchSuggestions';
+import * as Suggestions from 'actions/Suggestions';
 import 'sass/Key.sass';
 
 
@@ -12,11 +12,33 @@ export default class Key extends Component {
   constructor(props) {
     super(props);
 
-    this.handleClick = props.handleClick || this.handleClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
-    this.props.dispatch(fetchSuggestions(this.props.digits + this.props.label));
+    switch (this.props.label) {
+      case '1':
+        break;
+
+      case '*':
+        // Cycle through suggestions
+        this.props.dispatch(Suggestions.next());
+        break;
+
+      case '0':
+        // Finish the current word and start a new one
+        this.props.dispatch(Suggestions.end());
+        break;
+
+      case '#':
+        // add new word
+        break;
+
+      default:
+        this.props.dispatch(Suggestions.fetch((
+          this.props.digits + this.props.label
+        )));
+    }
   }
 
   render() {
@@ -36,13 +58,8 @@ export default class Key extends Component {
 }
 
 
-Key.defaultProps = {
-  handleClick: null,
-};
-
 Key.propTypes = {
   label: PropTypes.string.isRequired,
   position: PropTypes.number.isRequired,
   description: PropTypes.string.isRequired,
-  handleClick: PropTypes.func,
 };

@@ -9,7 +9,10 @@ import 'sass/Screen.sass';
 }))
 export default class Screen extends Component {
   render() {
-    const { text, lastWord } = this.props;
+    const { lastWord } = this.props;
+    const text = this.props.text
+      .map(({ word }) => word)
+      .join(' ');
 
     return (
       <div className="screen">
@@ -18,12 +21,14 @@ export default class Screen extends Component {
         </div>
 
         <div className="textbox">
-          <span>{text}</span>
+          <span>{text} </span>
           <span className="textbox-lastword">{lastWord}</span>
         </div>
 
         <div className="actions">
+          <a href="/">Opt.</a>
           <a href="/">Send</a>
+          <a href="/">Del.</a>
         </div>
       </div>
     );
