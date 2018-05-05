@@ -54,10 +54,26 @@ export default (state = initialState, action) => {
       };
     }
 
+    case actions.previousSuggestion: {
+      // Remove current word and pop last word from text.
+      const text = [...state.text];
+      const previousWord = text.pop();
+
+      return {
+        ...state,
+        text,
+        digits: previousWord.digits,
+        lastWord: previousWord.word,
+        lastWordIndex: previousWord.index,
+        suggestions: previousWord.suggestions,
+      };
+    }
+
     case actions.endSuggestion: {
       // Save the current word on the text array, and start a new word.
       const text = [...state.text];
       text.push({
+        digits: state.digits,
         word: state.lastWord,
         index: state.lastWordIndex,
         suggestions: [...state.suggestions],

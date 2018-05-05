@@ -7,5 +7,6 @@
   },
 
   "nextSuggestion": "NEXT_SUGGESTION",
+  "previousSuggestion": "PREVIOUS_SUGGESTION",
   "endSuggestion": "END_SUGGESTION"
 }
