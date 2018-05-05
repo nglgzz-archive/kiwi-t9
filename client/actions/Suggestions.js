@@ -11,12 +11,12 @@ export const next = () => ({
   type: actions.nextSuggestion,
 });
 
-export const previous = () => ({
-  type: actions.previousSuggestion,
-});
-
 // Here a request with the chosen word could be added, so the suggestions
 // could adapt to the user's usage.
 export const end = () => ({
   type: actions.endSuggestion,
+});
+
+export const wordDelete = () => ({
+  type: actions.wordDelete,
 });

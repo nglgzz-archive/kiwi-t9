@@ -6,7 +6,13 @@
     "rejected": "FETCH_SUGGESTIONS_REJECTED"
   },
 
+  "symbol": {
+    "insert": "SYMBOL_INSERT",
+    "next": "SYMBOL_NEXT",
+    "deleteSymbol": "SYMBOL_DELETE"
+  },
+
   "nextSuggestion": "NEXT_SUGGESTION",
-  "previousSuggestion": "PREVIOUS_SUGGESTION",
-  "endSuggestion": "END_SUGGESTION"
+  "endSuggestion": "END_SUGGESTION",
+  "wordDelete": "WORD_DELETE"
 }
