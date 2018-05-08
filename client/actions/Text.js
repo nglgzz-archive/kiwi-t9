@@ -1,8 +1,12 @@
 import actions from 'utils/actions.json';
 
 
+export const reset = () => ({
+  type: actions.text.reset,
+});
+
 let lastCall;
-export const insert = () => {
+export const insertSymbol = () => {
   const currentTime = new Date();
 
   // If this is the first time the user is pressing the symbol button, or of the

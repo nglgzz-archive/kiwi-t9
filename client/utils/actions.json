@@ -6,6 +6,10 @@
     "rejected": "FETCH_SUGGESTIONS_REJECTED"
   },
 
+  "text": {
+    "reset": "TEXT_RESET"
+  },
+
   "symbol": {
     "insert": "SYMBOL_INSERT",
     "next": "SYMBOL_NEXT",

@@ -77,6 +77,9 @@ export default (state = initialState, action) => {
       };
     }
 
+    case actions.text.reset:
+      return initialState;
+
     case actions.wordDelete: {
       // Remove current word and pop last word from text.
       const text = [...state.text];

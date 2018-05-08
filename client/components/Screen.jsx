@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as Suggestions from 'actions/Suggestions';
-import * as Symbols from 'actions/Symbols';
+import * as Text from 'actions/Text';
 import 'sass/Screen.sass';
 
 
@@ -17,8 +17,13 @@ export default class Screen extends Component {
   constructor(props) {
     super(props);
 
+    this.handleReset = this.handleReset.bind(this);
     this.handleSend = this.handleSend.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+  }
+
+  handleReset() {
+    this.props.dispatch(Text.reset());
   }
 
   handleSend() {
@@ -33,7 +38,7 @@ export default class Screen extends Component {
   handleDelete() {
     if (this.props.symbols) {
       // Remove last symbol.
-      this.props.dispatch(Symbols.deleteSymbol());
+      this.props.dispatch(Text.deleteSymbol());
     } else if (this.props.digits) {
       // Fetch suggestions for the last sequence of digits, minus the
       // last digit.
@@ -61,9 +66,9 @@ export default class Screen extends Component {
         </div>
 
         <div className="actions">
-          <button>Opt.</button>
+          <button onClick={this.handleReset}>Reset</button>
           <button onClick={this.handleSend}>Send</button>
-          <button onClick={this.handleDelete}>Del.</button>
+          <button onClick={this.handleDelete}>Delete</button>
         </div>
       </div>
     );

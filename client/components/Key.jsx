@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as Suggestions from 'actions/Suggestions';
-import * as Symbols from 'actions/Symbols';
+import * as Text from 'actions/Text';
 import 'sass/Key.sass';
 
 
@@ -19,7 +19,7 @@ export default class Key extends Component {
   handleClick() {
     switch (this.props.label) {
       case '1':
-        this.props.dispatch(Symbols.insert());
+        this.props.dispatch(Text.insertSymbol());
         break;
 
       case '*':
