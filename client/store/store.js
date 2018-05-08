@@ -6,6 +6,7 @@ import promise from 'redux-promise-middleware';
 // Redux middleware that allows to pass functions to the dispatch method.
 import thunk from 'redux-thunk';
 import reducer from 'reducers/index';
+import { loadState } from 'store/localStorage';
 
 
 // Used for Redux Dev Tools
@@ -15,4 +16,4 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const middleware = applyMiddleware(promise(), thunk);
 
 
-export default createStore(reducer, {}, composeEnhancers(middleware));
+export default createStore(reducer, loadState(), composeEnhancers(middleware));
