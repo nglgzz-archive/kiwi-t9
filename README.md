@@ -36,3 +36,15 @@ those folders is the following.
 - **api**: express routers
 - **data**: data... duh
 - **utils**: everything that doesn't fit the folders above
+
+
+## Features
+- Get word suggestions while typing [T9-style](https://en.wikipedia.org/wiki/T9_(predictive_text)).
+- Get suggestions only for existing words.
+- Cycle through suggestions using the `*` button.
+- Insert symbols pressing the `1` button. Quick repeated presses will cycle through symbols.
+- Let the world know you can use T9 (aka. Tweet what you typed).
+- One command deploy to Firebase.
+- Delete tapping on the `Del.` button (Yeah, it doesn't look like like a
+  physical button, but we can pretend it's a 2018 reincarnation of an old
+  phone rather than an exact replica, can't we?).
