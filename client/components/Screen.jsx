@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as Suggestions from 'actions/Suggestions';
-import * as Text from 'actions/Text';
+import { textReset, charDelete } from 'actions/index';
 import 'sass/Screen.sass';
 
 
-@connect(store => ({
-  // Join all words with the symbols attached to them, and then join them
-  // together separated by spaces.
-  text: store.text.text.map(({ word, symbols = '' }) => (word + symbols)).join(' '),
-  digits: store.text.digits,
-  lastWord: store.text.lastWord,
-  symbols: store.text.symbols,
+@connect(({ text }) => ({
+  // Chain all words, the symbols attached to them, and add space where needed.
+  words: text.reduce((words, { word, symbols, space }) => (
+    [...words, word, symbols, (space ? ' ' : '')]
+  ), []).join(''),
 }))
 export default class Screen extends Component {
   constructor(props) {
@@ -23,47 +20,30 @@ export default class Screen extends Component {
   }
 
   handleReset() {
-    this.props.dispatch(Text.reset());
+    this.props.dispatch(textReset());
   }
 
   handleSend() {
-    const { text, lastWord, symbols } = this.props;
-    const message = `${text} ${lastWord}${symbols}`;
-    const signature = ' - written with T9 https://t9.nglgzz.com';
-
-    const tweet = encodeURI(message + signature);
-    window.location.href = `https://twitter.com/home?status=${tweet}`;
+    const tweet = `${this.props.words} - written with T9 https://t9.nglgzz.com`;
+    window.location.href = `https://twitter.com/home?status=${encodeURI(tweet)}`;
   }
 
   handleDelete() {
-    if (this.props.symbols) {
-      // Remove last symbol.
-      this.props.dispatch(Text.deleteSymbol());
-    } else if (this.props.digits) {
-      // Fetch suggestions for the last sequence of digits, minus the
-      // last digit.
-      this.props.dispatch(Suggestions.fetch(this.props.digits.slice(0, -1)));
-    } else if (this.props.text.length > 0) {
-      // Remove current word and pop last word from text.
-      this.props.dispatch(Suggestions.wordDelete());
-    }
+    this.props.dispatch(charDelete());
   }
 
   render() {
-    const { text, lastWord, symbols } = this.props;
+    const { words } = this.props;
     const now = new Date();
     const minutes = `${now.getMinutes()}`.padStart(2, 0);
 
     return (
       <div className="screen">
         <div className="statusbar">
-          {`${now.getHours()}:${minutes}`}
+          <span className="charcounter">{140 - words.length}</span>
+          <span className="clock">{`${now.getHours()}:${minutes}`}</span>
         </div>
-
-        <div className="textbox">
-          <span>{text} </span>
-          <span className="textbox-lastword">{lastWord + symbols}</span>
-        </div>
+        <div className="textbox">{words}</div>
 
         <div className="actions">
           <button onClick={this.handleReset}>Reset</button>

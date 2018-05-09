@@ -5,7 +5,7 @@ import promise from 'redux-promise-middleware';
 
 // Redux middleware that allows to pass functions to the dispatch method.
 import thunk from 'redux-thunk';
-import reducer from 'reducers/index';
+import reducer from 'reducers/textReducer';
 import { loadState } from 'store/localStorage';
 
 

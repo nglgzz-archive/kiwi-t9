@@ -28,7 +28,8 @@
   max-width: 260px
   padding: 10px
 
-  .actions
+  .actions,
+  .statusbar
     display: flex
     justify-content: space-between
     width: 100%
@@ -52,7 +53,7 @@
   padding: 5px
   width: calc(100% - 10px)
 
-  &-lastword::after
+  &::after
     animation: blink 2s infinite
     background-color: $hunter-green
     content: '-'

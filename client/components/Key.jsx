@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as Suggestions from 'actions/Suggestions';
-import * as Text from 'actions/Text';
+import * as Action from 'actions/index';
 import 'sass/Key.sass';
 
 
-@connect(store => ({
-  digits: store.text.digits,
+@connect(({ text }) => ({
+  digits: text[text.length - 1].digits,
+  symbols: text[text.length - 1].symbols,
 }))
 export default class Key extends Component {
   constructor(props) {
@@ -19,25 +19,34 @@ export default class Key extends Component {
   handleClick() {
     switch (this.props.label) {
       case '1':
-        this.props.dispatch(Text.insertSymbol());
+        // Insert or rotate between symbols
+        this.props.dispatch(Action.symbolInsert());
         break;
 
       case '*':
         // Cycle through suggestions
-        this.props.dispatch(Suggestions.next());
+        this.props.dispatch(Action.wordNext());
         break;
 
       case '0':
         // Finish the current word and start a new one
-        this.props.dispatch(Suggestions.end());
+        this.props.dispatch(Action.wordEnd(true));
         break;
 
       case '#':
-        // add new word
+        // change case
         break;
 
       default:
-        this.props.dispatch(Suggestions.fetch((
+        // Another word is starting right after a symbol, end the current word and
+        // add no space.
+        if (this.props.symbols) {
+          this.props.dispatch(Action.wordEnd(false));
+          this.props.dispatch(Action.suggestionsFetch(this.props.label));
+          break;
+        }
+
+        this.props.dispatch(Action.suggestionsFetch((
           this.props.digits + this.props.label
         )));
     }
