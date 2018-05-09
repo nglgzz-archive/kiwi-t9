@@ -1,5 +1,5 @@
 import createReducer from 'reducers/createReducer';
-import { clone, last, exceptLast } from 'utils/arrayUtils';
+import { clone, last, exceptLast, exceptFirst } from 'utils/arrayUtils';
 
 
 // state.text will contain a list of words, each word has the following
@@ -97,6 +97,36 @@ function wordEnd(state, action) {
   return newState;
 }
 
+// Rotate between lower, Title, and UPPER case.
+function changeCase(state) {
+  const newState = clone(state);
+  const currentWord = last(newState.text);
+
+  // Find the new index for the case;
+  const cases = ['lower', 'title', 'upper'];
+  const index = (cases.indexOf(currentWord.case) + 1) % cases.length;
+  currentWord.case = cases[index];
+
+  switch (currentWord.case) {
+    case 'lower':
+      currentWord.word = currentWord.word.toLowerCase();
+      break;
+
+    case 'title':
+      currentWord.word = currentWord.word.toUpperCase()[0] +
+        exceptFirst(currentWord.word.toLowerCase());
+      break;
+
+    case 'upper':
+      currentWord.word = currentWord.word.toUpperCase();
+      break;
+
+    default:
+  }
+
+  return newState;
+}
+
 function suggestionsFetchFulfilled(state, action) {
   const newState = clone(state);
   const lastWord = last(newState.text);
@@ -144,6 +174,7 @@ export default createReducer(initialState, {
   CHAR_DELETE: charDelete,
   WORD_NEXT: wordNext,
   WORD_END: wordEnd,
+  CHANGE_CASE: changeCase,
   SUGGESTIONS_FETCH_FULFILLED: suggestionsFetchFulfilled,
   SYMBOL_INSERT: symbolInsert,
   SYMBOL_NEXT: symbolNext,

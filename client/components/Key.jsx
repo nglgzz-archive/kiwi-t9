@@ -34,7 +34,7 @@ export default class Key extends Component {
         break;
 
       case '#':
-        // change case
+        this.props.dispatch(Action.changeCase());
         break;
 
       default:

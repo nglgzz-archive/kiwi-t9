@@ -9,3 +9,6 @@ export const last = (array = []) => array[array.length - 1];
 
 // Return all elements of an array except the last one.
 export const exceptLast = (array = []) => array.slice(0, -1);
+
+// Return all elements of an array except the last one.
+export const exceptFirst = (array = []) => array.slice(1, array.length);
