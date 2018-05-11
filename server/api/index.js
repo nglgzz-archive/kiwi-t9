@@ -15,7 +15,7 @@ router.get('/suggestions', (req, res) => {
 
   res.send({
     digits: q,
-    suggestions: digitsToWordsMap[q] || [],
+    suggestions: digitsToWordsMap[q] || [{ word: q, frequency: -1 }],
   });
 });
 

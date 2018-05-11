@@ -132,10 +132,10 @@ function suggestionsFetchFulfilled(state, action) {
   const lastWord = last(newState.text);
   const { digits, suggestions } = action.payload.data;
 
-  // For now suggestions are ordered by rank (lower == better).
+  // For now suggestions are ordered by "global" frequency (higher == better).
   // Later it could also be possible to take into account how many times
   // each word was used by the user.
-  const orderedSuggestions = suggestions.sort((a, b) => (b.rank - a.rank));
+  const orderedSuggestions = suggestions.sort((a, b) => (a.rank - b.rank));
 
   lastWord.digits = digits;
   lastWord.index = 0;
