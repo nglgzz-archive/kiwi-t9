@@ -40,21 +40,60 @@ npm start
 And then connect to http://localhost:3000.
 
 
+## Suggestions & Languages
+Initially I was using the 5.000 most common English words as suggestions, and I
+got those from https://www.wordfrequency.info.
+
+The main problem I had with that list was that the words in it were lemmas (the
+form of the word you would find in the dictionary), so building  the sentence
+"I'm eating apples" would result in something like "I be eat apple".
+
+To solve this I decided to generate myself a list of the most common words.
+I turned to Twitter Stream API to get a pseudo-random sample of text written in
+English. I say pseudo-random because it's not truly random, Twitter has a
+character limit and people often use abbreviations to not exceed it, also,
+language tends to be more colloquial on Twitter than other places on the web, so
+slang and mispelled words are also common. For instance a sentence like "OMG I'm
+soooo hyped for this!!!" wouldn't sound strange on Twitter.
+
+All this is good though, because the app is simulating a texting app, and
+Twitter language is not very different from texting language. Also when you hit
+send, a tweet is created with the text you wrote, so it only makes sense to use
+Twitter language.
+
+Using `npm run add_language -- <lang>` you can add more languages to the
+suggestions (only one language is displayed at the time, you can switch language
+using `npm run make:suggestions <lang>`). The quality of the suggestions depends
+on how many people use Twitter in that language, I tried to generate suggestions
+in Italian, but I got way less tweets to work with. A workaround would be to
+make the tweets/getTweets.js script run longer, or use a number of tweets limit,
+rather than a time limit. Even then, your suggestions might be biased towards
+the kind of content that gets tweeted the most.
+
+
 ## Folder structure
-On the top level of the folder there are the **client** and **server** folders which
-respectively contain the code for the frontend and the backend. The structure of
-those folders is the following.
+The folder structure is the following.
 
 #### client
+Frontend code.
 - **actions**: Redux action creators
 - **components**: React components
 - **dist**: compiled static files (served as static content)
 - **fonts**: custom fonts (served as static content)
-- **reducers**: Redux reducers
+- **reducers**: Redux reducers and related scripts
 - **sass**: stylesheets
+- **store**: Redux store and related scripts
 - **utils**: anything that doesn't fit the folders above
 
+#### public
+Static files for Firebase.
+
 #### server
+Backend code.
 - **api**: express routers
-- **data**: data... duh
+- **data**: data for suggestions and conversion of words to digits
 - **utils**: everything that doesn't fit the folders above
+
+#### tweets
+Scripts and data for generating suggestions.
+- **data**: tweets and frequencies of words by language
