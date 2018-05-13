@@ -4,13 +4,7 @@ import { textReset, charDelete } from 'actions/index';
 import 'sass/Screen.sass';
 
 
-@connect(({ text }) => ({
-  // Chain all words, the symbols attached to them, and add space where needed.
-  words: text.reduce((words, { word, symbols, space }) => (
-    [...words, word, symbols, (space ? ' ' : '')]
-  ), []).join(''),
-}))
-export default class Screen extends Component {
+export class Screen extends Component {
   constructor(props) {
     super(props);
 
@@ -25,7 +19,7 @@ export default class Screen extends Component {
 
   handleSend() {
     const tweet = `${this.props.words} - written with T9 https://t9.nglgzz.com`;
-    window.location.href = `https://twitter.com/home?status=${encodeURI(tweet)}`;
+    window.location.assign(`https://twitter.com/home?status=${encodeURI(tweet)}`);
   }
 
   handleDelete() {
@@ -46,11 +40,19 @@ export default class Screen extends Component {
         <div className="textbox">{words}</div>
 
         <div className="actions">
-          <button onClick={this.handleReset}>Reset</button>
-          <button onClick={this.handleSend}>Send</button>
-          <button onClick={this.handleDelete}>Delete</button>
+          <button className="actions--reset" onClick={this.handleReset}>Reset</button>
+          <button className="actions--send" onClick={this.handleSend}>Send</button>
+          <button className="actions--delete" onClick={this.handleDelete}>Delete</button>
         </div>
       </div>
     );
   }
 }
+
+
+export default connect(({ text }) => ({
+  // Chain all words, the symbols attached to them, and add space where needed.
+  words: text.reduce((words, { word, symbols, space }) => (
+    [...words, word, symbols, (space ? ' ' : '')]
+  ), []).join(''),
+}))(Screen);

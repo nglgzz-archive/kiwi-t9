@@ -4,10 +4,12 @@ module.exports = {
 
   env: {
     browser: true,
+    jest: true,
   },
 
   rules: {
     'react/react-in-jsx-scope': ['off'],
+    'import/no-named-as-default': ['off'],
     'react/prop-types': ['off', { ignore: ['dispatch'] }],
   },
 

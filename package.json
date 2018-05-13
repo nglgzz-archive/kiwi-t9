@@ -12,7 +12,9 @@
     "deploy": "npm run build:firebase && firebase deploy --only hosting,functions",
     "start": "npm-run-all --parallel watch:build watch:server",
     "watch:build": "webpack --watch",
-    "watch:server": "nodemon server/index.js"
+    "watch:server": "nodemon server/index.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "author": "nglgzz",
   "license": "ISC",
@@ -34,18 +36,21 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
+    "babel-jest": "^22.4.3",
     "babel-loader": "^7.1.4",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-import-resolver-webpack": "^0.9.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
+    "jest": "^22.4.3",
     "node-sass": "^4.9.0",
     "nodemon": "^1.17.4",
     "npm-run-all": "^4.1.2",
@@ -76,8 +81,15 @@
       "react"
     ],
     "plugins": [
-      "transform-object-rest-spread",
-      "transform-decorators-legacy"
+      "transform-object-rest-spread"
     ]
+  },
+  "jest": {
+    "moduleFileExtensions": ["js", "jsx"],
+    "moduleDirectories": ["node_modules", "client"],
+    "moduleNameMapper": {
+      "\\.sass$": "<rootDir>/client/__test__/styleMock.js",
+      "axios": "<rootDir>/client/__test__/axiosMock.js"
+    }
   }
 }

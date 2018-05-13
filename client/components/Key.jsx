@@ -5,11 +5,7 @@ import * as Action from 'actions/index';
 import 'sass/Key.sass';
 
 
-@connect(({ text }) => ({
-  digits: text[text.length - 1].digits,
-  symbols: text[text.length - 1].symbols,
-}))
-export default class Key extends Component {
+export class Key extends Component {
   constructor(props) {
     super(props);
 
@@ -68,9 +64,19 @@ export default class Key extends Component {
   }
 }
 
+Key.defaultProps = {
+  position: 1,
+  description: '',
+};
 
 Key.propTypes = {
   label: PropTypes.string.isRequired,
-  position: PropTypes.number.isRequired,
-  description: PropTypes.string.isRequired,
+  position: PropTypes.number,
+  description: PropTypes.string,
 };
+
+
+export default connect(({ text }) => ({
+  digits: text[text.length - 1].digits,
+  symbols: text[text.length - 1].symbols,
+}))(Key);
