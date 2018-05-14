@@ -41,9 +41,7 @@ describe('Key component', () => {
     // Fast forward time by one second, so the next time the symbol button is
     // pressed it will insert a new symbol instead of changing the existing one.
     const timeInASec = new Date(Number(new Date()) + 1000);
-    const RealDate = Date;
-    // eslint-disable-next-line no-global-assign
-    Date = function constructor() { return timeInASec; };
+    mockDate(timeInASec);
 
     wrapper.find('button').simulate('click');
     expect(mockDispatch.mock.calls.length).toBe(3);
@@ -51,11 +49,7 @@ describe('Key component', () => {
       type: 'SYMBOL_INSERT',
     });
 
-
-    // Let's not mess with time and set Date back to its original value.
-    // https://imgur.com/gallery/nhFFBm3
-    // eslint-disable-next-line no-global-assign
-    Date = RealDate;
+    restoreDate();
   });
 
   it('dispatches WORD_NEXT', () => {
@@ -92,7 +86,7 @@ describe('Key component', () => {
     });
   });
 
-  it('dispatches SUGGESTIONS_FETCH', () => {
+  it('dispatches DIGITS_UPDATE', () => {
     const mockDispatch = jest.fn();
     const wrapper = setup({
       label: '3',
@@ -102,9 +96,15 @@ describe('Key component', () => {
 
     wrapper.find('button').simulate('click');
     expect(mockDispatch.mock.calls.length).toBe(1);
-    expect(mockDispatch).toBeCalledWith({
-      type: 'SUGGESTIONS_FETCH',
-      payload: '/api/suggestions?q=123',
+    expect(mockDispatch).lastCalledWith(expect.any(Function));
+
+    const action = mockDispatch.mock.calls[0][0];
+    action(mockDispatch);
+
+    expect(mockDispatch.mock.calls.length).toBe(2);
+    expect(mockDispatch).lastCalledWith({
+      type: 'DIGITS_UPDATE',
+      payload: '123',
     });
   });
 });

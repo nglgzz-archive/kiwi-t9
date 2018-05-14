@@ -127,6 +127,15 @@ function changeCase(state) {
   return newState;
 }
 
+function digitsUpdate(state, { payload }) {
+  const newState = clone(state);
+  const lastWord = last(newState.text);
+
+  lastWord.word = payload;
+  lastWord.digits = payload;
+  return newState;
+}
+
 function suggestionsFetchFulfilled(state, action) {
   const newState = clone(state);
   const lastWord = last(newState.text);
@@ -137,11 +146,14 @@ function suggestionsFetchFulfilled(state, action) {
   // each word was used by the user.
   const orderedSuggestions = suggestions.sort((a, b) => (a.rank - b.rank));
 
-  lastWord.digits = digits;
-  lastWord.index = 0;
-  // TODO - if there are no suggestions, show the digits or some letters on the
-  // current word.
-  lastWord.word = (orderedSuggestions[0] || { word: '' }).word;
+  // Update the last word, only if the suggestions we just received, were
+  // indended for that word (it could be that we just received the response for
+  // an intermediate call, and now the digits have changed).
+  if (digits === lastWord.digits) {
+    lastWord.digits = digits;
+    lastWord.index = 0;
+    lastWord.word = (orderedSuggestions[0] || { word: '' }).word;
+  }
 
   newState.suggestions[digits] = orderedSuggestions;
   return newState;
@@ -175,6 +187,7 @@ export default createReducer(initialState, {
   WORD_NEXT: wordNext,
   WORD_END: wordEnd,
   CHANGE_CASE: changeCase,
+  DIGITS_UPDATE: digitsUpdate,
   SUGGESTIONS_FETCH_FULFILLED: suggestionsFetchFulfilled,
   SYMBOL_INSERT: symbolInsert,
   SYMBOL_NEXT: symbolNext,

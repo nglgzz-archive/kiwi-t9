@@ -20,17 +20,12 @@ describe('Screen component', () => {
   it('matches snapshot', () => {
     // Use fixed time for the snapshot (the component contains a clock that
     // otherwise would make the test fail every time).
-    const fixedTime = new Date('10-10-2010');
-    const RealDate = Date;
-    // eslint-disable-next-line no-global-assign
-    Date = function constructor() { return fixedTime; };
+    mockDate(new Date('10-10-2010'));
 
     const wrapper = setup();
     expect(wrapper).toMatchSnapshot();
 
-    // Restore original value of Date.
-    // eslint-disable-next-line no-global-assign
-    Date = RealDate;
+    restoreDate();
   });
 
   it('dispatches TEXT_RESET', () => {

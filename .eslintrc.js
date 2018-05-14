@@ -21,10 +21,21 @@ module.exports = {
     },
   },
 
-  overrides: [{
-    // Override env and globals on test files.
-    files: ['client/__test__/**'],
-    env: { jest: true },
-    globals: { shallow: true },
-  }],
+  overrides: [
+    {
+      // Override env and globals on test files.
+      files: ['client/__test__/**'],
+      env: { jest: true },
+      globals: {
+        shallow: true,
+        mockDate: true,
+        restoreDate: true,
+      },
+    },
+    {
+      // Allow using console.log on server and tweets folders.
+      files: ['tweets/**', 'server/**'],
+      rules: { 'no-console': ['off'] },
+    },
+  ],
 };

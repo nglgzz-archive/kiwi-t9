@@ -7,10 +7,33 @@ export const wordNext = () => ({ type: 'WORD_NEXT' });
 export const wordEnd = space => ({ type: 'WORD_END', space });
 export const changeCase = () => ({ type: 'CHANGE_CASE' });
 
-export const suggestionsFetch = digits => ({
-  type: 'SUGGESTIONS_FETCH',
-  payload: axios.get(`/api/suggestions?q=${digits}`),
-});
+
+let lastSuggestionsFetch;
+export const suggestionsFetch = digits => (dispatch) => {
+  lastSuggestionsFetch = new Date();
+
+  // Whatever happens update the digits first, so the user gets instant feedback
+  // from the UI.
+  dispatch({ type: 'DIGITS_UPDATE', payload: digits });
+
+  // Wait 300ms before sending the request, this is to avoid sending useless
+  // intermediate requests if the user is typing fast (probably not the case in
+  // 2018, people haven't used T9 in a decade... but, you never know).
+  setTimeout(() => {
+    const currentTime = new Date();
+
+    // Fetch suggestions only if the suggestionsFetch function hasn't been
+    // called again after this timer was set.
+    if ((currentTime - lastSuggestionsFetch) >= 300) {
+      dispatch({
+        type: 'SUGGESTIONS_FETCH',
+        payload: axios.get(`/api/suggestions?q=${digits}`),
+        meta: digits,
+      });
+    }
+  }, 300);
+};
+
 
 let lastSymbolInsert;
 export const symbolInsert = () => {
