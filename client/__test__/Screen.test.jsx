@@ -1,10 +1,5 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import { Screen } from 'components/Screen';
-
-
-Enzyme.configure({ adapter: new Adapter() });
 
 
 describe('Screen component', () => {
@@ -22,9 +17,20 @@ describe('Screen component', () => {
     expect(wrapper.length).toBe(1);
   });
 
-  it('renders text properly', () => {
+  it('matches snapshot', () => {
+    // Use fixed time for the snapshot (the component contains a clock that
+    // otherwise would make the test fail every time).
+    const fixedTime = new Date('10-10-2010');
+    const RealDate = Date;
+    // eslint-disable-next-line no-global-assign
+    Date = function constructor() { return fixedTime; };
+
     const wrapper = setup();
-    expect(wrapper.find('.textbox').text()).toEqual('hello world');
+    expect(wrapper).toMatchSnapshot();
+
+    // Restore original value of Date.
+    // eslint-disable-next-line no-global-assign
+    Date = RealDate;
   });
 
   it('dispatches TEXT_RESET', () => {

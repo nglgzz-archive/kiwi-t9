@@ -1,16 +1,13 @@
 module.exports = {
   extends: 'airbnb',
   plugins: ['react', 'jsx-a11y', 'import'],
-
-  env: {
-    browser: true,
-    jest: true,
-  },
+  env: { browser: true },
 
   rules: {
     'react/react-in-jsx-scope': ['off'],
-    'import/no-named-as-default': ['off'],
     'react/prop-types': ['off', { ignore: ['dispatch'] }],
+    'import/no-named-as-default': ['off'],
+    'import/no-extraneous-dependencies': ['error', { 'devDependencies': ['client/__test__/**', 'tweets/**'] }],
   },
 
   parser: 'babel-eslint',
@@ -23,4 +20,11 @@ module.exports = {
       webpack: { config: 'webpack.config.js' },
     },
   },
+
+  overrides: [{
+    // Override env and globals on test files.
+    files: ['client/__test__/**'],
+    env: { jest: true },
+    globals: { shallow: true },
+  }],
 };

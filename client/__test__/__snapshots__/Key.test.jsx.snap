@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Key component matches snapshot 1`] = `
+<button
+  className="key key--center"
+  onClick={[Function]}
+>
+  <span
+    className="key-label"
+  >
+    1
+  </span>
+  <span
+    className="key-description"
+  />
+</button>
+`;
