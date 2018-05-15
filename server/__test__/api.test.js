@@ -26,7 +26,7 @@ describe('GET  /suggestions', () => {
           });
         });
         done();
-    });
+      });
   });
 
   it('returns status 400 when inserting non digits characters', (done) => {
@@ -35,7 +35,7 @@ describe('GET  /suggestions', () => {
       .expect(400)
       .then((response) => {
         expect(response.body).toEqual({
-          error: expect.stringContaining('numbers only')
+          error: expect.stringContaining('numbers only'),
         });
         done();
       });

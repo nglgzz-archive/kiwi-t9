@@ -7,7 +7,9 @@ module.exports = {
     'react/react-in-jsx-scope': ['off'],
     'react/prop-types': ['off', { ignore: ['dispatch'] }],
     'import/no-named-as-default': ['off'],
-    'import/no-extraneous-dependencies': ['error', { 'devDependencies': ['client/__test__/**', 'tweets/**'] }],
+    'import/no-extraneous-dependencies': ['error', {
+      'devDependencies': ['client/__test__/**', 'tweets/**', 'server/__test__/**'],
+    }],
   },
 
   parser: 'babel-eslint',
