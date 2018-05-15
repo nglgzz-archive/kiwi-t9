@@ -76,6 +76,7 @@ The folder structure is the following.
 
 #### client
 Frontend code.
+- **\_\_test\_\_**: tests, snapshots and related scripts.
 - **actions**: Redux action creators
 - **components**: React components
 - **dist**: compiled static files (served as static content)
