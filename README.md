@@ -5,11 +5,7 @@ words predictor similar to T9. More details about the assignment requirements ca
 be found in the [INSTRUCTIONS.md](https://github.com/nglgzz/kiwi-t9/blob/master/INSTRUCTIONS.md)
 file.
 
-<img src="http://i.imgur.com/8Ye7YrV.jpg" width="300">
-
-A demo can be seen at https://t9.nglgzz.com. Keep in mind that I'm using
-Firebase in free tier and it's throttling all requests cause I haven't
-configured a billing account.
+<img src="./kiwi-t9.avif" width="300">
 
 
 ## Features
